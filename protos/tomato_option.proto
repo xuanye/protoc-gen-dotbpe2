@@ -1,0 +1,42 @@
+
+// [START declaration]
+syntax = "proto3";
+package tomato;
+// [END declaration]
+
+// [START csharp_declaration]
+option csharp_namespace = "Tomato.Extra.Protobuf";
+// [END csharp_declaration]
+
+import "google/protobuf/descriptor.proto";
+
+//扩展服务
+extend google.protobuf.ServiceOptions {
+  int32 service_id = 51001; //服务号
+  string service_group =51002; //服务分组
+
+}
+extend google.protobuf.MethodOptions {
+  int32 message_id = 51002; //消息号
+  HttpApiOption http_api_option = 51003; //http 接口的对应配置
+  int32 timeout = 51004; //消息号
+}
+
+extend google.protobuf.FileOptions {
+
+  bool generic_markdown_doc = 51005; //是否生成文档
+  bool generic_abstract_class = 51006; //是否生成抽象类 ，主要是为了兼容1.0版本
+  bool generic_http_api_routes = 51007; //是否生成
+  string common_fields = 51008; //定义所有的公共字段
+
+}
+
+//
+message HttpApiOption {
+  string path = 1 ; // 路径
+  string method = 2 ; //请求的方法
+  string description = 3 ;//注释说明
+  int32  timeout= 4;   //调用超时配置
+  string plugin = 5 ; //插件
+  string category=6; // Api分类
+}
