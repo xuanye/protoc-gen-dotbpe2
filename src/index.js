@@ -138,7 +138,9 @@ function generateBPE() {
       });
 
       var checkService = {};
+    
       markMeta.serviceList.forEach((serviceMeta, i) => {
+      
         if (checkService[serviceMeta.serviceOptions.serviceId]) {
           console.error(
             '重复的ServiceId请检查!',
@@ -154,6 +156,34 @@ function generateBPE() {
             'same service id !!!' + serviceMeta.serviceOptions.serviceId
           );
         }
+        var checkMessage = {};
+
+        serviceMeta.methodList.forEach((methodMeta,i)=>{
+
+          var checkId = serviceMeta.serviceOptions.serviceId+"_"+methodMeta.methodOptions.messageId;
+       
+          if(checkMessage[checkId]){
+            console.error(
+              '重复的MessageId请检查!',
+              serviceMeta.serviceOptions.serviceId,  
+              serviceMeta.serviceName,            
+              methodMeta.methodName,
+            );
+            console.error(
+              '重复的MessageId请检查!',
+              serviceMeta.serviceOptions.serviceId,  
+              serviceMeta.serviceName,            
+              checkMessage[checkId],
+            );
+            throw new Error(
+              'same message id !!!' + methodMeta.methodOptions.messageId
+            );
+          }
+        
+          checkMessage[checkId] = methodMeta.methodName;
+
+        });
+      
         checkService[serviceMeta.serviceOptions.serviceId] =
           serviceMeta.serviceName;
       });
