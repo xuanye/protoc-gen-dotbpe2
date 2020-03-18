@@ -35,7 +35,7 @@ HTTP API 接口文档一览
 
 {{each serviceList service i}}
 ### 2.{{i+1}} {{service.serviceName}}
->  {{service.commetName}}
+>  {{service.commentName}}
 
 | 序号 |  服务名  |  消息ID  |  请求地址  |  说明  |  
 | ------------| ------------ | ------------ | ------------ | ------------ |{{each service.methodList method j}}{{if method.methodOptions.httpApiOption}}

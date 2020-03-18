@@ -11,13 +11,13 @@ namespace {{nameSpace}}
 {
 
     /// <summary>   
-    /// {{commetName}}
+    /// {{commentName}}
     /// </summary>   
     public abstract class {{serviceName}}Base:BaseService<I{{serviceName}}>,I{{serviceName}}
     {
 {{each methodList method index}}
         /// <summary>
-        /// {{method.commetName}}       
+        /// {{method.commentName}}       
         /// </summary>
         public abstract Task<RpcResult<{{method.outputType }}>> {{method.methodName}}Async({{method.inputType }} req{{if method.methodOptions.timeout>0}},int timeout={{method.methodOptions.timeout}}{{/if}});
 {{/each}}

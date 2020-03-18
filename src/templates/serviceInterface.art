@@ -9,14 +9,14 @@ using Tomato.Extra.Protobuf;
 namespace {{nameSpace}} 
 {
     /// <summary>   
-    /// {{commetName}} , {{serviceOptions.serviceGroup}}
+    /// {{commentName}} , {{serviceOptions.serviceGroup}}
     /// </summary>
     [RpcService({{serviceOptions.serviceId}}{{if serviceOptions.serviceGroup}},"{{serviceOptions.serviceGroup}}"{{/if}})]
     public interface I{{serviceName}}
     {
 {{each methodList method index}}
         /// <summary>
-        /// {{method.commetName}}       
+        /// {{method.commentName}}       
         /// </summary>    
         [RpcMethod({{method.methodOptions.messageId}})]{{if method.methodOptions.httpApiOption}}
         [Tomato.Gateway.Router({{@ method.methodOptions| formatRoute}})]{{/if}}
