@@ -82,7 +82,8 @@ proto.tomato.HttpApiOption.toObject = function(includeInstance, msg) {
     description: jspb.Message.getFieldWithDefault(msg, 3, ""),
     timeout: jspb.Message.getFieldWithDefault(msg, 4, 0),
     plugin: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    category: jspb.Message.getFieldWithDefault(msg, 6, "")
+    category: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    version: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -142,6 +143,10 @@ proto.tomato.HttpApiOption.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setCategory(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setVersion(value);
       break;
     default:
       reader.skipField();
@@ -211,6 +216,13 @@ proto.tomato.HttpApiOption.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = message.getVersion();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -322,6 +334,24 @@ proto.tomato.HttpApiOption.prototype.getCategory = function() {
  */
 proto.tomato.HttpApiOption.prototype.setCategory = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string version = 7;
+ * @return {string}
+ */
+proto.tomato.HttpApiOption.prototype.getVersion = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.tomato.HttpApiOption} returns this
+ */
+proto.tomato.HttpApiOption.prototype.setVersion = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

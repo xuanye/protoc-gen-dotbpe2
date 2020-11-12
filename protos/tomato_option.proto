@@ -39,4 +39,5 @@ message HttpApiOption {
   int32  timeout= 4;   //调用超时配置
   string plugin = 5 ; //插件
   string category=6; // Api分类
+  string version=7; // 接口所属版本
 }

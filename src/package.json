@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-tomato",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "用于生成 tomato rpc 样版代码的Protobuf 插件",
   "main": "index.js",
   "scripts": {

@@ -25,15 +25,15 @@ const markdownIndexTemplate = path.resolve(
     './templates/markdownindex.art'
 );
 
-String.prototype.firstUpperCase = function() {
-    return this.replace(/\b(\w)(\w*)/g, function($0, $1, $2) {
+String.prototype.firstUpperCase = function () {
+    return this.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
         return $1.toUpperCase() + $2.toLowerCase();
     });
 };
 
 template.defaults.imports.findCommentByPath = findCommentByPath;
 
-template.defaults.imports.formatRoute = function(options) {
+template.defaults.imports.formatRoute = function (options) {
     var sb = [];
     sb.push('"', options.httpApiOption.path);
     if (options.httpApiOption.method) {
@@ -47,6 +47,9 @@ template.defaults.imports.formatRoute = function(options) {
         }
     } else {
         sb.push('"');
+    }
+    if (options.httpApiOption.version) {
+        sb.push(',"', options.httpApiOption.version, '"');
     }
     if (options.httpApiOption.category) {
         sb.push(',Category="', options.httpApiOption.category, '"');
@@ -64,7 +67,7 @@ template.defaults.excape = false;
 generateBPE();
 
 function generateBPE() {
-    protocPlugin(protos => {
+    protocPlugin((protos) => {
         var genFiles = [];
 
         var markMeta = {
@@ -73,7 +76,7 @@ function generateBPE() {
             messageList: {},
         };
 
-        protos.forEach(proto => {
+        protos.forEach((proto) => {
             if (!proto.options.csharpNamespace) {
                 throw new Error('csharpNameSpace not set');
             }
@@ -223,7 +226,7 @@ function generateBPE() {
             /**/
             let commonFields = {};
             if (proto.options.commonFields) {
-                proto.options.commonFields.split(',').forEach(field => {
+                proto.options.commonFields.split(',').forEach((field) => {
                     let fV = field.split(':');
                     let fieldType = fV[1] ? parseInt(fV[1]) : 1;
                     commonFields[fV[0]] = fieldType;
@@ -295,12 +298,12 @@ function generateBPE() {
 
 function getServiceRefMessageType(serviceMeta, msgHub, refMessageType) {
     refMessageType = refMessageType || {};
-    serviceMeta.methodList.forEach(method => {
+    serviceMeta.methodList.forEach((method) => {
         let inputShortType = formatMessageType(method.inputType);
         if (msgHub[inputShortType] && !refMessageType[inputShortType]) {
             refMessageType[inputShortType] = msgHub[inputShortType];
 
-            msgHub[inputShortType].fieldList.forEach(field => {
+            msgHub[inputShortType].fieldList.forEach((field) => {
                 if (field.fullTypeName) {
                     //自定义类型
                     let shortName = formatMessageType(field.fullTypeName);
@@ -324,7 +327,7 @@ function getServiceRefMessageType(serviceMeta, msgHub, refMessageType) {
         if (msgHub[outputShortType] && !refMessageType[outputShortType]) {
             refMessageType[outputShortType] = msgHub[outputShortType];
 
-            msgHub[outputShortType].fieldList.forEach(field => {
+            msgHub[outputShortType].fieldList.forEach((field) => {
                 if (field.fullTypeName) {
                     //自定义类型
                     let shortName = formatMessageType(field.fullTypeName);
@@ -348,7 +351,7 @@ function getServiceRefMessageType(serviceMeta, msgHub, refMessageType) {
 }
 
 function getMessageRefMessageType(message, msgHub, refMessageType) {
-    message.fieldList.forEach(field => {
+    message.fieldList.forEach((field) => {
         if (field.fullTypeName) {
             //自定义类型
             let shortName = formatMessageType(field.fullTypeName);
