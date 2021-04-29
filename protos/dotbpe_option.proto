@@ -1,11 +1,11 @@
 
 // [START declaration]
 syntax = "proto3";
-package tomato;
+package dotbpe;
 // [END declaration]
 
 // [START csharp_declaration]
-option csharp_namespace = "Tomato.Extra.Protobuf";
+option csharp_namespace = "DotBPE.Extra.Protobuf";
 // [END csharp_declaration]
 
 import "google/protobuf/descriptor.proto";

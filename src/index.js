@@ -7,7 +7,7 @@ const template = require('art-template');
 //const fs = require('fs');
 const path = require('path');
 
-require('./tomato/protos/tomato_option_pb');
+require('./dotbpe/protos/dotbpe_option_pb');
 const { formatMessageType } = require('./libs/helper');
 
 const interfaceTemplate = path.resolve(
@@ -38,10 +38,10 @@ template.defaults.imports.formatRoute = function (options) {
     sb.push('"', options.httpApiOption.path);
     if (options.httpApiOption.method) {
         if (options.httpApiOption.method.firstUpperCase() == 'All') {
-            sb.push('",Tomato.Gateway.RestfulVerb.Any');
+            sb.push('",DotBPE.Gateway.RestfulVerb.Any');
         } else {
             sb.push(
-                '",Tomato.Gateway.RestfulVerb.',
+                '",DotBPE.Gateway.RestfulVerb.',
                 options.httpApiOption.method.firstUpperCase()
             );
         }
@@ -58,6 +58,7 @@ template.defaults.imports.formatRoute = function (options) {
     if (options.httpApiOption.plugin) {
         sb.push(',PluginName="', options.httpApiOption.plugin, '"');
     }
+
     //console.error(sb.join(""));
     return sb.join('');
     //Category =
@@ -94,29 +95,29 @@ function generateBPE() {
                     findCommentByPath([6, s], proto.sourceCodeInfo.locationList)
                 );
 
-                let comment = findCommentByPath(
+                let commet = findCommentByPath(
                     [6, s],
                     proto.sourceCodeInfo.locationList
                 );
                 var serviceMeta = {
                     fileName: proto.name,
                     serviceName: service.name,
-                    commentName: getFirstLineComment(comment),
+                    commetName: getFirstLineCommet(commet),
                     serviceOptions: service.options,
-                    description: comment,
+                    description: commet,
                     nameSpace: proto.options.csharpNamespace,
                     methodList: [],
                 };
 
                 service.methodList.forEach((rpc, r) => {
-                    let comment = findCommentByPath(
+                    let commet = findCommentByPath(
                         [6, s, 2, r],
                         proto.sourceCodeInfo.locationList
                     );
                     var methodMeta = {
                         methodName: rpc.name,
-                        commentName: getFirstLineComment(comment),
-                        description: comment,
+                        commetName: getFirstLineCommet(commet),
+                        description: commet,
                         inputType: formatMessageType(rpc.inputType),
                         outputType: formatMessageType(rpc.outputType),
                         methodOptions: rpc.options,
@@ -158,7 +159,6 @@ function generateBPE() {
                     );
                 }
                 var checkMessage = {};
-
                 serviceMeta.methodList.forEach((methodMeta, i) => {
                     var checkId =
                         serviceMeta.serviceOptions.serviceId +
@@ -189,8 +189,12 @@ function generateBPE() {
                     if (methodMeta.methodOptions.httpApiOption) {
                         var op = methodMeta.methodOptions.httpApiOption;
                         var urlId =
-                            op.category + '_' + op.method + '_' + op.path;
-
+                            (op.category || 'default') +
+                            '_' +
+                            op.method +
+                            '_' +
+                            op.path;
+                        //console.error(urlId);
                         if (checkUrl[urlId]) {
                             console.error(
                                 '重复的URL请检查!',
@@ -366,7 +370,7 @@ function getMessageRefMessageType(message, msgHub, refMessageType) {
         }
     });
 }
-function getFirstLineComment(comment) {
+function getFirstLineCommet(comment) {
     if (comment) {
         var lines = comment.split(/[\r\n]+/gi);
         return lines[0];

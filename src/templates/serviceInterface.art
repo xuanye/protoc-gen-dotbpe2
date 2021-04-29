@@ -3,23 +3,23 @@
 #region Designer generated code
 
 using System.Threading.Tasks;
-using Tomato.Rpc;
-using Tomato.Extra.Protobuf;
+using DotBPE.Rpc;
+using DotBPE.Extra.Protobuf;
 
 namespace {{nameSpace}} 
 {
     /// <summary>   
-    /// {{commentName}} , {{serviceOptions.serviceGroup}}
+    /// {{commetName}} , {{serviceOptions.serviceGroup}}
     /// </summary>
     [RpcService({{serviceOptions.serviceId}}{{if serviceOptions.serviceGroup}},"{{serviceOptions.serviceGroup}}"{{/if}})]
     public interface I{{serviceName}}
     {
 {{each methodList method index}}
         /// <summary>
-        /// {{method.commentName}}       
+        /// {{method.commetName}}       
         /// </summary>    
         [RpcMethod({{method.methodOptions.messageId}})]{{if method.methodOptions.httpApiOption}}
-        [Tomato.Gateway.Router({{@ method.methodOptions| formatRoute}})]{{/if}}
+        [DotBPE.Gateway.Router({{@ method.methodOptions| formatRoute}})]{{/if}}
         Task<RpcResult<{{method.outputType }}>> {{method.methodName}}Async({{method.inputType }} req{{if method.methodOptions.timeout>0}},int timeout={{method.methodOptions.timeout}}{{/if}});
 {{/each}}
     }

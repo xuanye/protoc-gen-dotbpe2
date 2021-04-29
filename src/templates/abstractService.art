@@ -2,22 +2,22 @@
 // source: {{fileName}}
 #region Designer generated code
 
-using Tomato.Rpc;
+using DotBPE.Rpc;
 using System.Threading.Tasks;
-using Tomato.Rpc.Server;
-using Tomato.Extra.Protobuf;
+using DotBPE.Rpc.Server;
+using DotBPE.Extra.Protobuf;
 
 namespace {{nameSpace}} 
 {
 
     /// <summary>   
-    /// {{commentName}}
+    /// {{commetName}}
     /// </summary>   
     public abstract class {{serviceName}}Base:BaseService<I{{serviceName}}>,I{{serviceName}}
     {
 {{each methodList method index}}
         /// <summary>
-        /// {{method.commentName}}       
+        /// {{method.commetName}}       
         /// </summary>
         public abstract Task<RpcResult<{{method.outputType }}>> {{method.methodName}}Async({{method.inputType }} req{{if method.methodOptions.timeout>0}},int timeout={{method.methodOptions.timeout}}{{/if}});
 {{/each}}

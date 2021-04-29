@@ -10,7 +10,7 @@ HTTP API 接口文档一览
 |  xRequestId  |  string  |  请求的唯一标识，用于服务间传递，HEAD中传递X-REQUEST-ID 传递，不传则自动创建  |  
 
 
-以上为Tomato.Rpc默认建议的公共参数，建议在接口入参定义，不同项目还需定义额外的公共参数，如手机App客户端项目，如下表格说是
+以上为DotBPE默认建议的公共参数，建议在接口入参定义，不同项目还需定义额外的公共参数，如手机App客户端项目，如下表格说是
 
 |  字段名  |  类型  |  注释  |  
 | ------------ | ------------ | ------------ |  
@@ -35,7 +35,7 @@ HTTP API 接口文档一览
 
 {{each serviceList service i}}
 ### 2.{{i+1}} {{service.serviceName}}
->  {{service.commentName}}
+>  {{service.commetName}}
 
 | 序号 |  服务名  |  消息ID  |  请求地址  |  说明  |  
 | ------------| ------------ | ------------ | ------------ | ------------ |{{each service.methodList method j}}{{if method.methodOptions.httpApiOption}}

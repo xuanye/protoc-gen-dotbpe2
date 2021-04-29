@@ -1,24 +1,24 @@
 {
-  "name": "protoc-gen-tomato",
-  "version": "1.0.2",
-  "description": "用于生成 tomato rpc 样版代码的Protobuf 插件",
+  "name": "protoc-gen-dotbpe2",
+  "version": "1.0.11",
+  "description": "用于生成dotbpe v2 样版代码的Protobuf 插件",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "protoc-gen-tomato": "./index.js"
+    "protoc-gen-dotbpe2": "./index.js"
   },
   "keywords": [
     "protobuf",
-    "tomato"
+    "dotbpe"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/xuanye/protoc-gen-tomato.git"
+    "url": "https://github.com/dotbpe/protoc-gen-dotbpe2.git"
   },
   "bugs": {
-    "url": "https://github.com/xuanye/protoc-gen-tomato/issues"
+    "url": "https://github.com/dotbpe/protoc-gen-dotbp2/issues"
   },
   "author": "Xuanye Wong <xuanye.wan@gmail.com> (http://xuanye.github.io/)",
   "readmeFilename": "../README.md",

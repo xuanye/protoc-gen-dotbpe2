@@ -7,7 +7,7 @@ pwd
 PROTOC=protoc
 
 
-OUT_DIR=../src/tomato/protos
+OUT_DIR=../src/dotbpe/protos
 
 PROTO_DIR=../protos
 
@@ -19,4 +19,4 @@ fi
 mkdir -p $OUT_DIR
 
 
-$PROTOC -I=$PROTO_DIR --js_out=import_style=commonjs,binary:$OUT_DIR $PROTO_DIR/tomato_option.proto
+$PROTOC -I=$PROTO_DIR --js_out=import_style=commonjs,binary:$OUT_DIR $PROTO_DIR/dotbpe_option.proto
